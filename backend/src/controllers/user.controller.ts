@@ -55,9 +55,6 @@ export const verifyOtp = async (req: Request, res: Response) => {
     // Find the user by email
     const user = await User.findOne({ email });
 
-    console.log("OTP from frontend:", otp);
-    console.log("OTP from DB:", user?.otp);
-
     // Check if user exists or if OTP is valid
     if (!user || user.otp !== otp) {
       return res.status(400).json({ msg: 'Invalid OTP' });
