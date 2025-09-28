@@ -4,7 +4,7 @@ const api = axios.create({
   baseURL: '/api',
 });
 
-// This is an interceptor. It runs before every request.
+
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');

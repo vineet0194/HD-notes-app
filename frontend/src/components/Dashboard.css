@@ -96,9 +96,9 @@
   border: 1px solid var(--border-color);
   border-radius: 8px;
   font-size: 16px;
-  font-family: inherit; /* Use the same font as the rest of the app */
-  resize: none; /* Prevent the user from resizing it */
-  box-sizing: border-box; /* Important for width calculation */
+  font-family: inherit;
+  resize: none;
+  box-sizing: border-box;
   margin-bottom: 10px;
 }
 

@@ -19,15 +19,14 @@
 
 .image-container {
   flex: 1;
-  background-image: url('../assets/landing_bg.jpg'); /* Replace with your image URL */
+  background-image: url('../assets/landing_bg.jpg');
   background-size: cover;
   background-position: center;
 }
 
-/* Responsive styles for mobile */
 @media (max-width: 768px) {
   .image-container {
-    display: none; /* Hide the image on smaller screens */
+    display: none;
   }
   .form-container {
     padding: 30px;

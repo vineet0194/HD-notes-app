@@ -4,7 +4,7 @@ import logo from '../assets/logo.png';
 
 interface VerifyOTPProps {
   email: string;
-  onLoginSuccess: (token: string) => void; // New prop
+  onLoginSuccess: (token: string) => void;
 }
 
 const VerifyOTP: React.FC<VerifyOTPProps> = ({ email, onLoginSuccess }) => {
@@ -18,18 +18,14 @@ const VerifyOTP: React.FC<VerifyOTPProps> = ({ email, onLoginSuccess }) => {
       const res = await axios.post('/api/users/verify-otp', { email, otp });
       const token = res.data.token;
 
-      // Save the token to localStorage
       localStorage.setItem('token', token);
-      
-      // Notify the parent App component
+
       onLoginSuccess(token);
 
     } catch (err: any) {
       setError(err.response?.data?.msg || 'Failed to verify OTP');
     }
   };
-  // ... rest of the component
-// In /frontend/src/components/VerifyOTP.tsx
 
   return (
     <div className="auth-container">

@@ -1,10 +1,8 @@
 import { Response } from 'express';
 import Note from '../models/note.model';
 
-// We need the custom Request type from our middleware
 import { AuthRequest } from '../middleware/auth.middleware';
 
-// @desc    Get user's notes
 export const getNotes = async (req: AuthRequest, res: Response) => {
   try {
     const notes = await Note.find({ user: req.user!.id }).sort({ createdAt: -1 });
@@ -14,7 +12,6 @@ export const getNotes = async (req: AuthRequest, res: Response) => {
   }
 };
 
-// @desc    Create a note
 export const createNote = async (req: AuthRequest, res: Response) => {
   try {
     const { content } = req.body;
@@ -29,14 +26,12 @@ export const createNote = async (req: AuthRequest, res: Response) => {
   }
 };
 
-// @desc    Delete a note
 export const deleteNote = async (req: AuthRequest, res: Response) => {
   try {
     const note = await Note.findById(req.params.id);
     if (!note) {
       return res.status(404).json({ msg: 'Note not found' });
     }
-    // Ensure user owns the note
     if (note.user.toString() !== req.user!.id) {
       return res.status(401).json({ msg: 'Not authorized' });
     }

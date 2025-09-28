@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Import axios
+import axios from 'axios';
 import logo from '../assets/logo.png';
 
 interface LoginProps {
-  onAuthSubmit: (email: string) => void; // Renamed for clarity
+  onAuthSubmit: (email: string) => void;
   onSwitchToSignup: () => void;
 }
 
-// And also receive it here
 const Login: React.FC<LoginProps> = ({ onAuthSubmit, onSwitchToSignup }) => {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
@@ -16,16 +15,12 @@ const Login: React.FC<LoginProps> = ({ onAuthSubmit, onSwitchToSignup }) => {
     e.preventDefault();
     setError('');
     try {
-      // Call the new login endpoint
       await axios.post('/api/users/login', { email });
-      // On success, switch to the OTP verification view
       onAuthSubmit(email);
     } catch (err: any) {
       setError(err.response?.data?.msg || 'Failed to send login code');
     }
   };
-
-// In /frontend/src/components/Login.tsx
 
   return (
     <div className="auth-container">

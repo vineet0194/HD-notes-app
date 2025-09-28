@@ -65,7 +65,6 @@ function App() {
 
     return (
     <div className="App">
-      {/* Wrap the rendered auth view with the new layout */}
       <AuthLayout>
         {renderAuthView()}
       </AuthLayout>

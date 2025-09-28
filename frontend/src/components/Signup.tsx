@@ -4,15 +4,14 @@ import logo from '../assets/logo.png';
 
 interface SignupProps {
   onSignupSuccess: (email: string) => void;
-  onSwitchToLogin: () => void; // Add the prop here
+  onSwitchToLogin: () => void;
 }
 
-// And also receive it here
 const Signup: React.FC<SignupProps> = ({ onSignupSuccess, onSwitchToLogin }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    birthday: '', // Add birthday to the initial state
+    birthday: '',
   });
   const [error, setError] = useState('');
 
@@ -24,12 +23,11 @@ const Signup: React.FC<SignupProps> = ({ onSignupSuccess, onSwitchToLogin }) => 
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError(''); // Clear previous errors
+    setError('');
     try {
-      // Send a POST request to the backend registration endpoint
       const res = await axios.post('/api/users/register', formData);
-      console.log(res.data); // Log the success message
-      onSignupSuccess(email); // Notify parent component of success
+      console.log(res.data);
+      onSignupSuccess(email);
     } catch (err: any) {
       console.error(err.response?.data?.msg || 'An error occurred');
       setError(err.response?.data?.msg || 'Failed to register');

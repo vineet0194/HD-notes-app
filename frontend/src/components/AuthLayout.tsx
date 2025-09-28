@@ -1,7 +1,6 @@
 import React from 'react';
-import './AuthLayout.css'; // We'll create this file next
+import './AuthLayout.css';
 
-// This component will wrap our Signup and Login forms
 const AuthLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <div className="layout-container">

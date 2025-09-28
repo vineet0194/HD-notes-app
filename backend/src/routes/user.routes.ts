@@ -6,7 +6,7 @@ import auth from '../middleware/auth.middleware';
 const router = Router();
 
 router.post('/register', registerUser);
-router.post('/login', loginUser); // Add the new login route
+router.post('/login', loginUser);
 router.post('/verify-otp', verifyOtp);
 
 router.get('/me', auth, getMe);

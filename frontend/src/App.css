@@ -1,19 +1,17 @@
 .App {
   display: flex;
   justify-content: center;
-  align-items: center; /* Changed to center for better vertical alignment */
+  align-items: center;
   min-height: 100vh;
-  padding: 2rem; /* Use rem for better scaling */
+  padding: 2rem;
 }
 
 .auth-container {
   width: 100%;
   max-width: 400px;
-  /* Change to left alignment */
   text-align: left; 
 }
 
-/* New styles for the logo */
 .auth-container .logo {
   display: flex;
   align-items: center;
@@ -21,7 +19,7 @@
   font-size: 24px;
   font-weight: bold;
   color: var(--primary-blue);
-  margin-bottom: 40px; /* Increased margin */
+  margin-bottom: 40px;
 }
 
 .auth-container h2 {
@@ -75,7 +73,6 @@
   margin-top: 20px;
   font-size: 14px;
   color: var(--text-secondary);
-  /* The text with the link should be centered */
   text-align: center; 
 }
 
