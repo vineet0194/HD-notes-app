@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import logo from '../assets/logo.png';
 
 interface SignupProps {
   onSignupSuccess: (email: string) => void;
@@ -36,34 +37,57 @@ const Signup: React.FC<SignupProps> = ({ onSignupSuccess, onSwitchToLogin }) => 
   };
 
   return (
-    <div>
-      <h2>Sign Up</h2>
+    <div className="auth-container">
+      <div className="logo">
+        <img src={logo} alt="HD Logo" width="24" height="24" />
+        <span>HD</span>
+      </div>
+      <h2>Sign up</h2>
+      <p>Sign up to enjoy the feature of HD</p>
+      
       <form onSubmit={onSubmit}>
-        <div>
-          <input type="text" placeholder="Name" name="name" value={name} onChange={onChange} required />
-        </div>
-        <div>
-          <input type="email" placeholder="Email Address" name="email" value={email} onChange={onChange} required />
-        </div>
-        {/* Add the new birthday input field */}
-        <div>
-          <label htmlFor="birthday">Birthday:</label>
+        <div className="form-group">
+          <label htmlFor="name">Your Name</label>
           <input
-            type="date"
+            id="name"
+            type="text"
+            name="name"
+            value={name}
+            onChange={onChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="birthday">Date of Birth</label>
+          <input
             id="birthday"
+            type="date"
             name="birthday"
             value={birthday}
             onChange={onChange}
             required
           />
         </div>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            value={email}
+            onChange={onChange}
+            required
+          />
+        </div>
+        
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Sign Up</button>
+        <button type="submit">Get OTP</button>
       </form>
-      <p>
+
+      <p className="switch-auth-text">
         Already have an account?{' '}
-        <span onClick={onSwitchToLogin} style={{ color: 'blue', cursor: 'pointer' }}>
-          Sign In
+        <span onClick={onSwitchToLogin}>
+          Sign in
         </span>
       </p>
     </div>

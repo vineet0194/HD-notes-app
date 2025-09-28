@@ -1,0 +1,109 @@
+.dashboard-container {
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.dashboard-header .logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--primary-blue);
+}
+
+.dashboard-header .sign-out-btn {
+  background: none;
+  border: none;
+  color: var(--primary-blue);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.welcome-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.welcome-card h1 {
+  font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.welcome-card p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.create-note-btn {
+  width: 100%;
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+.notes-list h2 {
+  font-size: 20px;
+}
+
+.note-item {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.note-item p {
+  margin: 0;
+  flex-grow: 1;
+}
+
+.note-item .delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.dashboard-container form textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit; /* Use the same font as the rest of the app */
+  resize: none; /* Prevent the user from resizing it */
+  box-sizing: border-box; /* Important for width calculation */
+  margin-bottom: 10px;
+}
+
+.dashboard-container form textarea:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 2px rgba(74, 128, 240, 0.2);
+}

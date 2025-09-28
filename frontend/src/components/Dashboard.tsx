@@ -1,35 +1,45 @@
 import React, { useState, useEffect } from 'react';
-import api from '../api/api'; // Import our new api utility
+import api from '../api/api';
+import './Dashboard.css';
+import logo from '../assets/logo.png';
 
 interface DashboardProps {
   onLogout: () => void;
 }
 
-// Define a type for our note objects
 interface Note {
   _id: string;
   content: string;
   createdAt: string;
 }
 
+// Add a type for the user object
+interface User {
+  name: string;
+  email: string;
+}
+
 const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
+  const [user, setUser] = useState<User | null>(null);
   const [notes, setNotes] = useState<Note[]>([]);
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(true);
 
-  // Fetch notes when the component loads
   useEffect(() => {
-    const fetchNotes = async () => {
+    const fetchData = async () => {
       try {
-        const res = await api.get('/notes');
-        setNotes(res.data);
+        // Fetch both user details and notes
+        const userRes = await api.get('/users/me');
+        const notesRes = await api.get('/notes');
+        setUser(userRes.data);
+        setNotes(notesRes.data);
       } catch (err) {
-        console.error('Error fetching notes', err);
+        console.error('Error fetching data', err);
       } finally {
         setLoading(false);
       }
     };
-    fetchNotes();
+    fetchData();
   }, []);
 
   const handleCreateNote = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -72,31 +82,45 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
   }
 
   return (
-    <div>
-      <h1>Your Notes</h1>
-      <button onClick={onLogout}>Logout</button>
-
-      {/* This form should always be visible */}
+    <div className="dashboard-container">
+      <header className="dashboard-header">
+        <div className="logo">
+          {/* 2. Replace the SVG with an img tag */}
+          <img src={logo} alt="HD Logo" width="24" height="24" />
+          <span>Dashboard</span>
+        </div>
+        <button onClick={onLogout} className="sign-out-btn">Sign Out</button>
+      </header>
+      
+      <div className="welcome-card">
+        <h1>Welcome, {user?.name}!</h1>
+        <p>Email: {user?.email}</p>
+      </div>
+      
+      {/* For simplicity, we'll keep the create form visible */}
+      {/* A more advanced implementation might use a modal */}
       <form onSubmit={handleCreateNote}>
         <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder="What's on your mind?"
+          placeholder="Create a new note..." // Updated placeholder
           required
         />
-        <button type="submit">Create Note</button>
+        <button type="submit" className="create-note-btn">Create Note</button>
       </form>
 
-      {/* This is the section for displaying the notes list */}
-      <div>
+      <div className="notes-list">
+        <h2>Notes</h2>
         {notes.length === 0 ? (
           <p>You have no notes yet.</p>
         ) : (
           notes.map((note) => (
-            <div key={note._id} style={{ border: '1px solid #ccc', margin: '10px', padding: '10px' }}>
+            <div key={note._id} className="note-item">
               <p>{note.content}</p>
-              <small>Created on: {new Date(note.createdAt).toLocaleDateString()}</small>
-              <button onClick={() => handleDeleteNote(note._id)}>Delete</button>
+              <button onClick={() => handleDeleteNote(note._id)} className="delete-btn">
+                {/* Trash icon SVG */}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              </button>
             </div>
           ))
         )}

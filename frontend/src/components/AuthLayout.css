@@ -1,0 +1,35 @@
+.layout-container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  min-height: 80vh;
+  background-color: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.form-container {
+  flex: 1;
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container {
+  flex: 1;
+  background-image: url('../assets/landing_bg.jpg'); /* Replace with your image URL */
+  background-size: cover;
+  background-position: center;
+}
+
+/* Responsive styles for mobile */
+@media (max-width: 768px) {
+  .image-container {
+    display: none; /* Hide the image on smaller screens */
+  }
+  .form-container {
+    padding: 30px;
+  }
+}

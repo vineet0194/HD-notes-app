@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import User from '../models/user.model';
 import sendEmail from '../utils/sendEmail';
-import jwt from 'jsonwebtoken'; // Make sure jsonwebtoken is imported
+import jwt from 'jsonwebtoken';
+import { AuthRequest } from '../middleware/auth.middleware';
 
 export const registerUser = async (req: Request, res: Response) => {
   // Destructure birthday from the request body
@@ -121,6 +122,17 @@ export const loginUser = async (req: Request, res: Response) => {
 
     res.status(200).json({ msg: 'Login OTP sent to your email.' });
 
+  } catch (err: any) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+};
+
+export const getMe = async (req: AuthRequest, res: Response) => {
+  try {
+    // The user's id is attached to the request by the auth middleware
+    const user = await User.findById(req.user!.id).select('-otp -otpExpires');
+    res.json(user);
   } catch (err: any) {
     console.error(err.message);
     res.status(500).send('Server Error');

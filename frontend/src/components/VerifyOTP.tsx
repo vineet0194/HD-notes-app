@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import logo from '../assets/logo.png';
 
 interface VerifyOTPProps {
   email: string;
@@ -28,14 +29,30 @@ const VerifyOTP: React.FC<VerifyOTPProps> = ({ email, onLoginSuccess }) => {
     }
   };
   // ... rest of the component
+// In /frontend/src/components/VerifyOTP.tsx
+
   return (
-    <div>
-      <h2>Verify Your Account</h2>
-      <p>An OTP has been sent to {email}</p>
+    <div className="auth-container">
+      <div className="logo">
+        <img src={logo} alt="HD Logo" width="24" height="24" />
+        <span>HD</span>
+      </div>
+      <h2>Enter OTP</h2>
+      <p>A verification code has been sent to {email}</p>
+      
       <form onSubmit={onSubmit}>
-        <div>
-          <input type="text" placeholder="Enter OTP" name="otp" value={otp} onChange={(e) => setOtp(e.target.value)} required />
+        <div className="form-group">
+          <label htmlFor="otp">OTP</label>
+          <input
+            id="otp"
+            type="text"
+            name="otp"
+            value={otp}
+            onChange={(e) => setOtp(e.target.value)}
+            required
+          />
         </div>
+        
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <button type="submit">Verify</button>
       </form>

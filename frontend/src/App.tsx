@@ -3,9 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Signup from './components/Signup';
-import Login from './components/Login'; // Import Login component
+import Login from './components/Login';
 import VerifyOTP from './components/VerifyOTP';
 import Dashboard from './components/Dashboard';
+import AuthLayout from './components/AuthLayout';
 
 function App() {
   // Add 'login' to our possible views
@@ -62,7 +63,14 @@ function App() {
     }
   };
 
-  return <div className="App">{renderAuthView()}</div>;
+    return (
+    <div className="App">
+      {/* Wrap the rendered auth view with the new layout */}
+      <AuthLayout>
+        {renderAuthView()}
+      </AuthLayout>
+    </div>
+  );
 }
 
 export default App;
